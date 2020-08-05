@@ -1,0 +1,252 @@
+<link rel="stylesheet" href="/css/jquery.tagsinput-revisited.css" />
+<script src="/js/jquery.tagsinput-revisited.js"></script>
+
+<div class="widgetTabs">
+    <%- include('../elements/menu.ejs') %> 
+    <div class="mainWrap without_sidebar" id="tabBlog" style="margin-top: 20px;">
+        <div class="main">
+            <div class="content">
+                <div class="mainWrap with_sidebar sideBarRight">
+                    <div class="main">
+                        <!-- Content -->						
+                        <div class="content">
+                            <section class="post no_margin">
+                                <article class="post_content">
+                                    <div class="post_text_area">
+                                        <div class="woocommerce">
+                                            <form name="checkout" method="post" class="checkout woocommerce-checkout" action="/notes/add" enctype="application/x-www-form-urlencoded">
+                                                <div class="col2-set" id="customer_details">
+                                                    <div class="col-1" style="width: 100%;">
+                                                        <div class="woocommerce-billing-fields">
+                                                            <h3>Note Details</h3>
+
+                                                            <p class="form-row form-row form-row-wide address-field validate-required" id="note_type_field">
+                                                                <label for="note_type" class="">Note Type</label>
+                                                                <select name="note_type" id="note_type" class="country_to_state country_select" style="width:100%;">
+                                                                    <option value="">Select a type&hellip;</option>
+                                                                    <% for(i in noteTypes) { %>
+                                                                        <option <%
+                                                                            if (noteDetails && 
+                                                                            noteDetails.note_type == i ) {
+                                                                                %>
+                                                                                selected="selected"
+                                                                                <%
+                                                                            }
+                                                                            %> value="<%= i %>"> <%= noteTypes[i]  %>  </option>
+                                                                    <% } %>
+                                                                </select>
+                                                            </p>
+
+                                                            <p class="form-row form-row form-row-wide address-field validate-required" id="title_field">
+                                                                <label for="title" class="">Title</label>
+                                                                <input type="text" class="input-text " name="title" id="title" placeholder="Title..." 
+                                                                value="<%= (noteDetails) ? noteDetails.title : '' %>" style="width:100%;" />
+                                                            </p>
+
+                                                            <label for="note" class="">Note </label>
+                                                            <textarea name="note" id="editor1" rows="10" cols="80" placeholder="This is the note"><%= typeof noteDetails != 'undefined' ? noteDetails.description : '' %></textarea>
+                                                            <div id="summernote"></div>
+                                                            <div class="clear"></div>
+                                                            <%
+                                                            if (noteDetails) {
+                                                                %>
+                                                                <input type="hidden" name="note_id" value="<%= noteDetails.id %>" >
+                                                                <%
+                                                            }
+                                                            %>
+                                                            <div class="form-row form-row form-row-wide validate-required validate-phone" id="phone_number_field">
+                                                                <p class="input-group form-row" style="width:100%;padding:0px;">
+                                                                <div id="cloud_tags" class="demo jqcloud" style="height: 200px;">
+                                                                </div>
+                                                                </p>
+                                                            </div>
+
+
+                                                            <p class="form-row form-row form-row-wide address-field validate-required" id="title_field">
+                                                                <label for="contact" class="">Choose Contact</label>
+                                                                <input type="text" class="input-text" name="contact" id="contact" placeholder="Choose contacts below ..." value="<%= typeof noteDetails != 'undefined'? noteDetails.contact : '' %>" />
+                                                            </p>
+
+                                                            <div class="clear"></div>
+                                                            <div class="form-row form-row form-row-wide validate-required validate-phone" id="phone_number_field">
+                                                                <p class="input-group form-row" style="width:100%;padding:0px;">
+                                                                <div id="cloud_tags_contacts" class="demo jqcloud" style="height: 200px;">
+                                                                </div>
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="clear"></div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="order_review" class="woocommerce-checkout-review-order">
+                                                    <div id="payment" class="woocommerce-checkout-payment float-right" style="background:none;float: right;">
+                                                        <input type="submit" class="btns btn btn-primary big" name="submit" id="submit" value="Save" data-value="Save" style="font-weight: bold;" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tagsWrap"></div>
+                                    </div>
+                                </article>
+                            </section>
+
+                        </div>					
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+</div>
+<style type="text/css">
+    .thumbnail {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+        transition: 0.3s;
+        min-width: 40%;
+        border-radius: 5px;
+    }
+
+    .thumbnail-description {
+        min-height: 40px;
+    }
+
+    .thumbnail:hover {
+        cursor: pointer;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+    }
+    .thumbnail img {
+        height: 130px;
+        padding-top: 30px;
+    }
+</style>
+
+<script src="/js/ckeditor/ckeditor.js"></script>
+<script src="/js/jqcloud.js"></script>
+<link rel="stylesheet" href="/css/jqcloud.css">
+
+<script type="text/javascript">
+    function clickCloud(tagName) {
+        var editor = CKEDITOR.instances.editor1;
+        editor.insertHtml(tagName + ' ');
+    }
+    function clickCloudContact(tagName) {
+        $('#contact').addTag(tagName);
+        $('#contact_tag').removeAttr('placeholder');
+    }
+    var userContacts = <%- JSON.stringify(userContacts) %>;
+    $(document).ready(function () {
+        CKEDITOR.replace('editor1', {
+            toolbar: [
+                {name: 'styles', items: ['Format', 'Font', 'FontSize']},
+                {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'CopyFormatting']},
+                {name: 'colors', items: ['TextColor', 'BGColor']},
+                {name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+                {name: 'links', items: ['Link', 'Unlink']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']},
+                {name: 'insert', items: ['Image', 'Table']},
+                {name: 'tools', items: ['Maximize']},
+                {name: 'editing', items: ['Scayt']}
+            ],
+            customConfig: '',
+            disallowedContent: 'img{width,height,float}',
+            extraAllowedContent: 'img[width,height,align]',
+            height: 200,
+            contentsCss: ['https://cdn.ckeditor.com/4.8.0/full-all/contents.css', 'mystyles.css'],
+            bodyClass: 'document-editor',
+            format_tags: 'p;h1;h2;h3;pre',
+            removeDialogTabs: 'image:advanced;link:advanced',
+            stylesSet: [
+                {name: 'Marker', element: 'span', attributes: {'class': 'marker'}},
+                {name: 'Cited Work', element: 'cite'},
+                {name: 'Inline Quotation', element: 'q'},
+                {
+                    name: 'Special Container',
+                    element: 'div',
+                    styles: {
+                        padding: '5px 10px',
+                        background: '#eee',
+                        border: '1px solid #ccc'
+                    }
+                },
+                {
+                    name: 'Compact table',
+                    element: 'table',
+                    attributes: {
+                        cellpadding: '5',
+                        cellspacing: '0',
+                        border: '1',
+                        bordercolor: '#ccc'
+                    },
+                    styles: {
+                        'border-collapse': 'collapse'
+                    }
+                },
+                {name: 'Borderless Table', element: 'table', styles: {'border-style': 'hidden', 'background-color': '#E6E6FA'}},
+                {name: 'Square Bulleted List', element: 'ul', styles: {'list-style-type': 'square'}}
+            ]
+        });
+        var words = [
+            {text: "I", weight: 13},
+            {text: "am", weight: 10.5},
+            {text: "this", weight: 9.4},
+            {text: "love", weight: 8},
+            {text: "happy", weight: 6.7},
+            {text: "The", weight: 8},
+            {text: "forever", weight: 6},
+            {text: "make", weight: 8},
+            {text: "finances", weight: 8},
+            {text: "account", weight: 7},
+            {text: "never", weight: 7},
+            {text: "peace", weight: 7},
+            {text: "in", weight: 9},
+            {text: "always", weight: 8},
+            {text: "have", weight: 8},
+            {text: "loved", weight: 7},
+            {text: "family", weight: 8},
+            {text: "my", weight: 10},
+            {text: "and", weight: 10},
+            {text: "will", weight: 9},
+            {text: "need", weight: 8},
+            {text: "writing", weight: 9},
+            {text: "letter", weight: 8},
+            {text: "were", weight: 9},
+            {text: "infact", weight: 7},
+            {text: "settings", weight: 7},
+            {text: "kids", weight: 9},
+            {text: "thought", weight: 8},
+            {text: "peace", weight: 7},
+            {text: "you", weight: 9},
+            {text: "with", weight: 9}
+        ];
+        $('#cloud_tags').jQCloud(words, {
+            autoResize: true
+        });
+        $('#cloud_tags_contacts').jQCloud(userContacts, {
+            autoResize: true
+        });
+        $('#contact').tagsInput({
+            limit: null,
+            validationPattern: null,
+            unique: true,
+            interactive: true,
+            placeholder: 'Choose Contacts below...',
+            width: 'auto',
+            height: 'auto',
+            delimiter: ',',
+            removeWithBackspace: true
+        });
+        $('#contact_tag').attr('readonly', 'readonly');
+<%
+if (typeof notesContacts != 'undefined' && notesContacts) {
+    for (i in notesContacts ) {
+        %>
+                clickCloudContact("<%= notesContacts[i].name %>");
+        <%
+    }
+}
+%>
+    });
+</script>
+

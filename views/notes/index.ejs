@@ -1,0 +1,135 @@
+<div class="widgetTabs">
+  <%- include('../elements/menu.ejs') %>
+  <div class="mainWrap without_sidebar" id="tabBlog" style="margin-top: 20px;">
+    <div class="main">
+      <div class="content">
+        <div class="mainWrap with_sidebar">
+          <div class="main">
+            <div class="content" style="width: 100%;">
+              <div class="sc_content main">
+                <h2 class="sc_title sc_title_regular text-center">
+                  Notes Section
+                </h2>
+              </div>
+
+              <div class="clr-row">
+                <div class="clr-col-lg-4 clr-col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      Add Note
+                    </div>
+                    <div class="card-block">
+                      <div
+                        class="card-media-block"
+                        style="padding-left: 40%; padding-top: 16%;"
+                      >
+                        <img
+                          src="/img/add_note.png"
+                          alt="Add Note"
+                          class="card-media-image"
+                        />
+                        <div class="card-media-description">
+                          <span class="card-media-title">
+                            &nbsp;
+                          </span>
+                          <span class="card-media-text">
+                            &nbsp;
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-text">&nbsp;</div>
+                    </div>
+                    <div class="card-footer">
+                      <button
+                        class="btns"
+                        onclick="window.location = '/notes/add'"
+                      >
+                        Create New
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <% if (notes) { for (i in notes) { %>
+                <div class="clr-col-lg-4 clr-col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <%= noteTypes[notes[i].note_type] %>
+                    </div>
+                    <div class="card-block">
+                      <div class="card-media-block wrap">
+                        <div class="card-media-description">
+                          <span class="card-media-title">
+                            <%= notes[i].note_title %>
+                          </span>
+                          <span class="card-media-text">
+                            &nbsp;
+                          </span>
+                        </div>
+                      </div>
+                      <div class="card-text">
+                        <%= notes[i].description.toString().substring(0,150) %>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button
+                        class="btns btn btn-success"
+                        onclick="window.location = '/notes/add/<%= notes[i].id %>'"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="btns btn btn-primary"
+                        onclick="window.location = '/notes/email//notes/add/<%= notes[i].id %>'"
+                      >
+                        Mail Me
+                      </button>
+                      <button
+                        class="btns btn btn-danger"
+                        onclick="deleteNote('<%= notes[i].id %>');"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <% } } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Content -->
+</div>
+<style type="text/css">
+  .thumbnail {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    min-width: 40%;
+    border-radius: 5px;
+  }
+
+  .thumbnail-description {
+    min-height: 40px;
+  }
+
+  .thumbnail:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+  }
+  .thumbnail img {
+    height: 130px;
+    padding-top: 30px;
+  }
+</style>
+<script type="text/javascript">
+  function deleteNote(noteid) {
+    var isDelete = window.confirm("Do you really want to delete note!");
+    if (isDelete == true) {
+      window.location = "/notes/delete/" + noteid;
+    }
+  }
+</script>

@@ -1,0 +1,125 @@
+<div class="widgetTabs">
+  <%- include('../elements/menu') %>
+  <div class="mainWrap without_sidebar" id="tabBlog" style="margin-top: 20px;">
+    <div class="main">
+      <div class="content">
+        <div class="mainWrap with_sidebar sideBarRight">
+          <div class="main">
+            <!-- Content -->
+            <div class="content">
+              <div>
+                <section class="post no_margin">
+                  <article class="post_content">
+                    <div class="post_text_area">
+                      <div class="woocommerce">
+                        <form
+                          name="checkout"
+                          method="post"
+                          class="checkout woocommerce-checkout"
+                          action="/reminder"
+                          enctype="application/x-www-form-urlencoded"
+                        >
+                          <div class="col2-set" id="customer_details">
+                            <div class="col-1" style="width: 100%;">
+                              <div class="woocommerce-billing-fields">
+                                <h3>Reminder Settings</h3>
+                                <p
+                                  class="form-row form-row form-row-wide validate-required"
+                                  id="first_name_field"
+                                >
+                                  <label for="remind_months" class=""
+                                    >Remind me in
+                                  </label>
+                                  <select
+                                    name="remind_months"
+                                    id="remind_months"
+                                    class="country_to_state country_select"
+                                    required="required"
+                                  >
+                                    <option value=""
+                                      >Choose Months&hellip;</option
+                                    >
+                                    <% for (i in remindMonths) { %>
+                                    <option
+                                    <% if(i == userDetails.remind_months) { %>
+                                         selected="selected"
+                                    <% } %> 
+                                    value="<%= i %>"
+                                      ><%= remindMonths[i] %></option
+                                    >
+                                    <% } %>
+                                  </select>
+                                </p>
+
+                                <p
+                                  class="form-row form-row form-row-wide validate-required"
+                                  id="first_name_field"
+                                >
+                                  <label for="for_days" class=""
+                                    >Keep me Reminding for
+                                  </label>
+                                  <select
+                                    name="for_days"
+                                    id="for_days"
+                                    class="country_to_state country_select"
+                                    required="required"
+                                  >
+                                    <option value=""
+                                      >Choose Days&hellip;</option
+                                    >
+                                    <% for (i in forDays) { %>
+                                    <option
+                                    <% if(i == userDetails.for_days) { %> 
+                                        selected="selected" 
+                                    <% } %>
+                                     value="<%= i %>"
+                                      ><%= forDays[i] %></option
+                                    >
+                                    <% } %>
+                                  </select>
+                                </p>
+
+                                <div class="clear"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            id="order_review"
+                            class="woocommerce-checkout-review-order"
+                          >
+                            <div
+                              id="payment"
+                              class="woocommerce-checkout-payment"
+                              style="background: none;"
+                            >
+                              <div
+                                class="form-row place-order"
+                                style="padding: 0px; margin-top: 10px;"
+                              >
+                                <input
+                                  type="submit"
+                                  class="btns btn btn-primary"
+                                  name="submit"
+                                  id="submit"
+                                  value="Submit"
+                                  data-value="Submit"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="tagsWrap"></div>
+                    </div>
+                  </article>
+                </section>
+              </div>
+            </div>
+            <!-- /Sidebar -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Content -->
+</div>

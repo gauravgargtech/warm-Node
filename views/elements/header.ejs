@@ -1,0 +1,80 @@
+<header class="noFixMenu menu_right with_user_menu">
+  <div class="topWrapFixed"></div>
+  <div class="topWrap" style="width: 100%;">
+    <div class="mainmenu_area">
+      <div class="main">
+        <div class="logo">
+          <a href="/">
+            <img
+              src="/img/footer_logo.png"
+              style="height: 36px;"
+              class="logo_main"
+              alt=""
+            />
+            <img src="/img/footer_logo.png" class="logo_fixed" alt="" />
+          </a>
+        </div>
+        <a href="#" class="openResponsiveMenu icon-menu" title="Menu"></a>
+        <nav class="menuTopWrap topMenuStyleLine">
+          <ul id="mainmenu">
+            <li class="menu-item">
+              <a title="Homepage" href="/">
+                Home
+              </a>
+            </li>
+            <li class="menu-item">
+              <a title="Plans" href="/plans">
+                Plans
+              </a>
+            </li>
+            <li class="menu-item">
+              <a title="Privacy Policy" href="/privacy-policy">
+                Privacy Policy
+              </a>
+            </li>
+            <li class="menu-item">
+              <a title="F&Q" href="/faq">
+                F&Q
+              </a>
+            </li>
+            <li class="menu-item">
+              <a title="Blog" href="/blog">
+                Blog
+              </a>
+            </li>
+
+            <% if (locals.isUser) { %>
+            <li class="menu-item thumb_title custom_view_item">
+              <a title="My Account" href="/account">
+                My Account
+              </a>
+            </li>
+            <li class="menu-item thumb_title custom_view_item">
+              <a title="My Notes" href="/notes">
+                My Notes
+              </a>
+            </li>
+            <li class="menu-item thumb_title custom_view_item">
+              <a title="Logout" href="/logout">
+                Logout
+              </a>
+            </li>
+            <% } else { %>
+            <li class="menu-item thumb_title custom_view_item">
+              <a title="Login" href="/login">
+                Login
+              </a>
+            </li>
+            <li class="menu-item thumb_title custom_view_item">
+              <a title="Register" href="/register">
+                Register
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<% // echo $this->Flash->render(); %>

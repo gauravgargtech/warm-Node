@@ -1,0 +1,54 @@
+<div class="sc_contact_form sc_contact_form_contact margin_bottom_50_imp">
+  <form
+    id="sc_contact_form_18"
+    data-formtype="contact_1"
+    method="post"
+    action="/contact"
+  >
+    <div class="columnsWrap">
+      <div class="columns1_3">
+        <label class="required" for="sc_contact_form_username">Name</label>
+        <input id="sc_contact_form_username" type="text" name="name"
+        required="required">
+      </div>
+      <div class="columns1_3">
+        <label class="required" for="sc_contact_form_email">E-mail</label>
+        <input
+          id="sc_contact_form_email"
+          type="text"
+          name="email"
+          required="required"
+        />
+      </div>
+      <div class="columns1_3">
+        <label class="required" for="sc_contact_form_subj">Subject</label>
+        <input
+          id="sc_contact_form_subj"
+          type="text"
+          name="subject"
+          required="required"
+        />
+      </div>
+    </div>
+    <div class="message">
+      <label class="required" for="sc_contact_form_message">Your Message</label>
+      <textarea
+        id="sc_contact_form_message"
+        class="textAreaSize"
+        name="message"
+        required="required"
+      ></textarea>
+    </div>
+    <div class="sc_contact_form_button">
+      <div class="squareButton ico">
+        <input
+          type="submit"
+          class="btns btn btn-primary"
+          name="contact_us"
+          value="Contact Us"
+        />
+      </div>
+    </div>
+    <div class="result sc_infobox"></div>
+  </form>
+</div>

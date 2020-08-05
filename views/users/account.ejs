@@ -1,0 +1,196 @@
+<link rel="stylesheet" href="/css/woocommerce/woocommerce.css" />
+<link rel="stylesheet" href="/css/woocommerce/woocommerce-layout.css" />
+<link rel="stylesheet" href="/css/woocommerce/woocommerce-smallscreen.css" />
+    
+<div class="widgetTabs">
+
+<%- include('../elements/menu') %>
+    <div class="mainWrap without_sidebar" id="tabBlog" style="margin-top: 20px;">
+        <div class="main">
+            <div class="content">
+                <div class="mainWrap with_sidebar sideBarRight">
+                    <div class="main">						
+                        <div class="content">
+                            <div>
+                                <section class="post no_margin">
+                                    <article class="post_content">
+                                        <div class="post_text_area">
+                                            <div class="woocommerce">
+                                                <form name="checkout" method="post" class="checkout woocommerce-checkout" action="#" enctype="application/x-www-form-urlencoded">
+                                                    <div class="col2-set" id="customer_details">
+                                                        <div class="col-1" style="width: 100%;">
+                                                            <div class="woocommerce-billing-fields">
+                                                                <h3>Account Details</h3>
+                                                                <p class="form-row form-row form-row-first validate-required" id="first_name_field">
+                                                                    <label for="first_name" class="">First Name 
+                                                                    </label>
+                                                                    <input type="text" class="input-text " name="first_name" id="first_name" placeholder="" value="<%= userDetails.first_name; %>" />
+                                                                </p>
+                                                                <p class="form-row form-row form-row-last validate-required" id="last_name_field">
+                                                                    <label for="last_name" class="">Last Name 
+                                                                    </label>
+                                                                    <input type="text" class="input-text " name="last_name" id="last_name" placeholder="" value="<%= userDetails.last_name; %>" />
+                                                                </p>
+                                                                <div class="clear"></div>
+                                                                <p class="form-row form-row form-row-wide validate-required" id="email_field">
+                                                                    <label for="email" class="">Email Address 
+                                                                    </label>
+                                                                    <input type="text" class="input-text " name="email" id="email" placeholder="Email" value="<%= userDetails.email; %>" disabled="disabled" />
+                                                                </p>
+                                                                <div class="clear"></div>
+                                                                <p class="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="country_id_field">
+                                                                    <label for="country_id" class="">Country</label>
+                                                                    <select name="country_id" id="country_id" class="country_to_state country_select" required="required">
+                                                                        <option value="">Select a country&hellip;</option>
+                                                                        <%  
+                                                                        var selectedCountryCode = '';
+                                                                        if (countries) {
+                                                                            for (i in countries) {
+                                                                                if (countries[i].id == userDetails.country_id) {
+                                                                                    selectedCountryCode = countries[i].phone_code;
+                                                                                    %>
+                                                                                    <option selected="selected" value="<%= countries[i].id %>"><%= countries[i].name %></option>
+                                                                                    <%
+                                                                                } else {
+                                                                                %>
+                                                                                <option value="<%= countries[i].id %>"><%= countries[i].name %></option>
+                                                                                <%
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        %>
+                                                                    </select>
+                                                                </p>
+                                                                <div class="form-row form-row form-row-wide validate-required validate-phone" id="phone_number_field">
+                                                                    <label for="phone_number" class="">Phone</label>
+                                                                    <p class="input-group form-row" style="width:100%;padding:0px;">
+                                                                        <span class="input-group-addon placeholder_phone" id="placeholder_phone" style="padding:0px;height:auto;"></span>
+                                                                        <input type="text" class="input-text" placeholder="Phone no" id="phone_number" name="phone_number" aria-describedby="sizing-addon1" required="required" value="<%= userDetails.phone_number %>">
+                                                                    </p>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                                <p class="form-row form-row form-row-wide address-field validate-required" id="state_id_field">
+                                                                    <label for="state_id" class="">State / County</label>
+                                                                    <select name="state_id" id="state_id" class="country_to_state country_select ">
+                                                                        <option value="">Select a state / county&hellip;</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p class="form-row form-row form-row-first address-field validate-required validate-state" id="city_id_field">
+                                                                    <label for="city_id" class="">Town / City</label>
+                                                                    <select name="city_id" id="city_id" class="country_to_state country_select ">
+                                                                        <option value="">Select a Town / City&hellip;</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p class="form-row form-row form-row-last address-field validate-required validate-postcode" id="postcode_field">
+                                                                    <label for="postcode" class="">Postcode / Zip 
+                                                                    </label>
+                                                                    <input type="text" class="input-text " name="postcode" id="postcode" placeholder="Postcode / Zip" value="<%= userDetails.postcode %>" />
+                                                                </p>
+                                                                <p class="form-row form-row form-row-wide address-field validate-required" id="address_1_field">
+                                                                    <label for="address_1" class="">Address 
+                                                                    </label>
+                                                                    <input type="text" class="input-text " name="address_1" id="address_1" placeholder="Street address" value="<%= userDetails.address_1 %>" />
+                                                                </p>
+                                                                <p class="form-row form-row form-row-wide address-field" id="address_2_field">
+                                                                    <input type="text" class="input-text " name="address_2" id="address_2" placeholder="Apartment, suite, unit etc. (optional)" value="<%= userDetails.address_2 %>" />
+                                                                </p>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="order_review" class="woocommerce-checkout-review-order">
+                                                        <div id="payment" class="woocommerce-checkout-payment" style="background:none;">
+                                                            <div class="form-row place-order" style="padding:0px;margin-top:10px;">
+                                                                <input type="submit" class="btns btn btn-primary" name="submit" id="submit" value="Submit" data-value="Submit" style="float:right;font-weight:bold;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="tagsWrap"></div>
+                                        </div>
+                                    </article>
+                                </section>
+                            </div>
+                        </div>					
+                        <!-- /Sidebar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /Content -->
+</div>
+<style type="text/css">
+    .placeholder_phone {
+        width : 7%;
+    }
+    @media only screen and (max-width: 767px) {
+        .placeholder_phone {
+            width : 20%;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    var countryId = "<%= userDetails.country_id %>";
+    var stateId = "<%= userDetails.state_id %>";
+    var cityId = "<%= userDetails.city_id %>";
+
+    $(document).ready(function () {
+        $('#country_id').on('change', function () {
+            var countryId = $(this).val();
+            //$("#placeholder_phone").html("+" + countriesJson[countryId]);
+            populateStates();
+        });
+        $('#state_id').on('change', function () {
+            populateCities();
+        });
+        if (countryId > 0) {
+            $("#placeholder_phone").html("+<%= selectedCountryCode %>");
+            populateStates();
+        }
+        if (stateId > 0) {
+            setTimeout(populateCities, 3000);
+        }
+    });
+
+    function populateStates(defaultState = '') {
+        $.post('/account/populate_states', {'country': $('#country_id').val(), selectedState: defaultState}, function (data) {
+            var allStates = data;
+            var $select = $('#state_id');
+            $select.find('option').remove();
+            $.each(allStates, function (key, value) {
+                if (stateId != allStates[key].id) {
+                    $select.append('<option value=' + allStates[key].id + '>' + allStates[key].name + '</option>');
+                } else {
+                    $select.append('<option selected="selected" value=' + allStates[key].id + '>' + allStates[key].name + '</option>');
+                }
+            });
+        });
+    }
+
+    function populateCities(defaultCity = '') {
+        $.post('/account/populate_city', {'state': $('#state_id').val(), selectedCity: defaultCity}, function (data) {
+            var allCities = data;
+            console.log(allCities);
+            var $select = $('#city_id');
+            $select.find('option').remove();
+            $.each(allCities, function (key, value) {
+                if (cityId != allCities[key].id) {
+                    $select.append('<option value=' + allCities[key].id + '>' + allCities[key].name + '</option>');
+                } else {
+                    $select.append('<option selected="selected" value=' + allCities[key].id + '>' + allCities[key].name + '</option>');
+                }
+            });
+        });
+    }
+
+    function clickCloud(tagName) {
+        $('#interested_in').addTag(tagName);
+        $('#interested_in_tag').removeAttr('placeholder');
+    }
+
+</script>
+

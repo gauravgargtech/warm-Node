@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="/css/login.css" />
+
+<div class="mainWrap with_sidebar sideBarRight">
+  <div class="main">
+    <!-- Content -->
+    <div class="content">
+      <div class="container container-boxes">
+        <div class="row">
+          <div class="col-sm-5">
+              <%- include('../elements/social_login.ejs') %>
+          </div>
+          <div class="col-sm-6" style="width: 5%;">
+            <div class="vl"></div>
+          </div>
+
+          <div class="col-sm-5">
+            <div class="box white-bg">
+              <h5>Register</h5>
+              <div class="sep red"></div>
+              <div class="margin-1"></div>
+              <form
+                id="contact_form"
+                action="/register"
+                class="no-bottom"
+                method="post"
+              >
+              <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
+                <div class="message d-none">
+                  <div id="contact_alert" class="alert"></div>
+                </div>
+
+                <label for="first_name" class="sr-only">First Name</label>
+                <input
+                  type="text"
+                  class="underline"
+                  style="width: 40%;"
+                  name="first_name"
+                  id="first_name"
+                  placeholder="First Name..."
+                  required
+                />
+
+                <label for="last_name" class="sr-only">Last Name</label>
+                <input
+                  type="text"
+                  class="underline"
+                  name="last_name"
+                  style="width: 40%; margin-left: 18%;"
+                  id="last_name"
+                  placeholder="Last Name..."
+                  required
+                />
+
+                <label for="email" class="sr-only">Email</label>
+                <input
+                  type="email"
+                  class="underline"
+                  name="email"
+                  id="email"
+                  placeholder="Your email..."
+                  required
+                />
+
+                <label for="password" class="sr-only">Password</label>
+                <input
+                  type="password"
+                  class="underline"
+                  name="password"
+                  id="password"
+                  placeholder="Your password..."
+                  required
+                />
+
+                <div
+                  class="form-row place-order"
+                  style="float: right; margin-top: 20px;"
+                >
+                  <input
+                    type="submit"
+                    class="form-submit-button"
+                    name="register"
+                    id="register"
+                    value="Register"
+                    data-value="Register"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

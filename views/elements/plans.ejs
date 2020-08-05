@@ -1,0 +1,177 @@
+<style type="text/css">
+  * {
+    -webkit-box-sizing: content-box;
+  }
+</style>
+
+<div id="topOfPage" class="topTabsWrap">
+  <div class="main">
+    <h3 class="pageTitle h3">&nbsp;</h3>
+  </div>
+</div>
+
+<div class="mainWrap without_sidebar">
+  <div class="main">
+    <div class="content">
+      <div>
+        <section class="post no_margin">
+          <article class="post_content">
+            <div class="post_text_area">
+              <h2 class="sc_title sc_title_regular text-center">Plans</h2>
+
+              <div class="sc_pricing_table columns_4 alignCenter">
+                <div class="sc_pricing_columns sc_pricing_column_1">
+                  <ul>
+                    <li class="sc_pricing_data sc_pricing_united">
+                      Choose Your Plan <br />
+                      (One-time fee)
+                    </li>
+                    <li class="sc_pricing_data">Number of Notes</li>
+                    <li class="sc_pricing_data">Total Contacts</li>
+                    <li class="sc_pricing_data">Coffee cup Collage</li>
+                    <li class="sc_pricing_data">Social Login</li>
+                    <li class="sc_pricing_data">24h Support Email Support</li>
+                    <li class="sc_pricing_data sc_pricing_footer"></li>
+                  </ul>
+                </div>
+                <div class="sc_pricing_columns sc_pricing_column_2">
+                  <ul class="columnsAnimate">
+                    <li class="sc_pricing_data sc_pricing_title">Basic</li>
+                    <li class="sc_pricing_data sc_pricing_price">
+                      <div class="sc_price_item">
+                        <span class="sc_price_currency">$</span>
+                        <div class="sc_price_money">
+                          <del>5</del>
+                          <span style="color: #e33c1c; font-size: 25px;"
+                            >Free</span
+                          >
+                        </div>
+                      </div>
+                    </li>
+                    <li class="sc_pricing_data">5</li>
+                    <li class="sc_pricing_data">10</li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-cancel"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data sc_pricing_footer">
+                      <div
+                        class="sc_button sc_button_style_global sc_button_size_medium squareButton global medium"
+                      >
+                        <button
+                          class="btn btn-primary"
+                          onclick="window.location = '/users/register/1'"
+                        >
+                          <?php
+                                                    if (!empty($planId)) {
+                                                        if ($planId == 1) {
+                                                            echo 'Current Plan';
+                                                        } else {
+                                                            echo 'Downgrade';
+                                                        }
+                                                    } else {
+                                                        echo 'Sign Up';
+                                                    }
+                                                    ?>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="sc_pricing_columns sc_pricing_column_3">
+                  <ul class="columnsAnimate">
+                    <li class="sc_pricing_data sc_pricing_title">Standard</li>
+                    <li class="sc_pricing_data sc_pricing_price">
+                      <div class="sc_price_item">
+                        <span class="sc_price_currency">$</span>
+                        <div class="sc_price_money">
+                          <del>10</del>
+                          <span style="color: #e33c1c; font-size: 25px;"
+                            >Free</span
+                          >
+                        </div>
+                      </div>
+                    </li>
+                    <li class="sc_pricing_data">10</li>
+                    <li class="sc_pricing_data">20</li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-cancel"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data sc_pricing_footer">
+                      <div
+                        class="sc_button sc_button_style_global sc_button_size_medium squareButton global medium"
+                      >
+                        <button
+                          class="btn btn-primary"
+                          onclick="window.location = '/users/register/2'"
+                        >
+                          <?php
+                                                    if (!empty($planId)) {
+                                                        if ($planId == 2) {
+                                                            echo 'Current Plan';
+                                                        } else {
+                                                            echo 'Upgrade';
+                                                        }
+                                                    } else {
+                                                        echo 'Sign Up';
+                                                    }
+                                                    ?>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="sc_pricing_columns sc_pricing_column_4">
+                  <ul class="columnsAnimate">
+                    <li class="sc_pricing_data sc_pricing_title">Premium</li>
+                    <li class="sc_pricing_data sc_pricing_price">
+                      <div class="sc_price_item">
+                        <span class="sc_price_currency">$</span>
+                        <div class="sc_price_money">
+                          <del>15</del>
+                          <span style="color: #e33c1c; font-size: 25px;"
+                            >Free</span
+                          >
+                        </div>
+                      </div>
+                    </li>
+                    <li class="sc_pricing_data">50</li>
+                    <li class="sc_pricing_data">50</li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data">
+                      <span class="sc_icon icon-ok"></span>
+                    </li>
+                    <li class="sc_pricing_data sc_pricing_footer">
+                      <div
+                        class="sc_button sc_button_style_global sc_button_size_medium squareButton global medium margin_top_30"
+                        style="margin-top: 20px;"
+                      >
+                        Coming Soon
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
