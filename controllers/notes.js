@@ -19,7 +19,7 @@ const noteTypes = [
 
 module.exports = {
   getNotes: async (req, res) => {
-    let userId = 2; // req.session.userId;
+    let userId = req.session.userId;
     let notes = await functions.getNotes(userId);
     let errorMessage = req.flash("noteDelete");
 
@@ -33,7 +33,7 @@ module.exports = {
   addNote: async (req, res) => {
     let noteId = req.params.noteid;
 
-    let userId = 2; // req.session.userId;
+    let userId = req.session.userId;
     let userContacts = await functions.getUserContacts(userId);
 
     let notesContacts, noteDetails;
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   insertNote: async (req, res) => {
-    let userId = 2; //req.session.userId;
+    let userId = req.session.userId;
 
     let noteId;
 

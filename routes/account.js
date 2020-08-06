@@ -22,6 +22,6 @@ module.exports = (app) => {
     accountController.saveAccount
   );
 
-  app.get("/reminder", accountController.getReminder);
-  app.post("/reminder", accountController.setReminder);
+  app.get("/reminder", commonLogin.checkAuth, accountController.getReminder);
+  app.post("/reminder", commonLogin.checkAuth, accountController.setReminder);
 };

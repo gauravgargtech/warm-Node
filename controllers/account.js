@@ -23,7 +23,7 @@ const forDays = {
 
 module.exports = {
   account: async (req, res) => {
-    userId = 2; //req.session.userId;
+    userId = req.session.userId;
 
     console.log(userId);
     var errorMessage = req.flash("accountError");
@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         where: {
-          id: 2, //req.session.userId,
+          id: req.session.userId,
         },
       }
     )
@@ -84,7 +84,7 @@ module.exports = {
   },
 
   getReminder: (req, res) => {
-    let userId = 2; //req.session.userId;
+    let userId = req.session.userId;
 
     commonLogin
       .getUserById(userId)
@@ -100,7 +100,7 @@ module.exports = {
   },
 
   setReminder: async (req, res) => {
-    let userId = 2; //req.session.userId;
+    let userId = req.session.userId;
     await UserModel.update(
       {
         remind_months: req.body.remind_months,

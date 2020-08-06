@@ -112,7 +112,7 @@ app.use(passport.session());
 
 //const indexer = require("./routes/index");
 
-app.use("/", require('./routes/index'));
+app.use("/", require("./routes/index"));
 require("./routes/users")(app);
 require("./routes/account")(app);
 require("./routes/notes")(app);

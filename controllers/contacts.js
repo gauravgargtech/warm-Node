@@ -19,7 +19,7 @@ const relations = {
 
 module.exports = {
   getContacts: async (req, res) => {
-    let userId = 2; // req.session.userId;
+    let userId = req.session.userId;
     let userContacts = await functions.getUserContacts(userId);
     let message = req.flash("contactCreated");
 
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   addContact: async (req, res) => {
-    let userId = 2; // req.session.userId;
+    let userId = req.session.userId;
 
     let errors = validationResult(req);
 
@@ -56,7 +56,7 @@ module.exports = {
   },
 
   insertNote: (req, res) => {
-    let userId = 2; //req.session.userId;
+    let userId = req.session.userId;
 
     if (req.body.note_id) {
       notesModel

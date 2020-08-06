@@ -51,7 +51,7 @@ module.exports = {
   checkAuth: (req, res, next) => {
     //console.log(req.session.userId);
     if (!req.session.userId) {
-      //res.redirect("/login");
+      return res.redirect("/login");
     }
     next();
   },
