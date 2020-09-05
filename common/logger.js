@@ -1,5 +1,6 @@
 const winston = require("winston"),
   WinstonCloudWatch = require("winston-cloudwatch");
+const config = require("../config/keys");
 
 const AWS = require("aws-sdk");
 
@@ -10,10 +11,10 @@ AWS.config.update({
 winston.add(
   new WinstonCloudWatch({
     cloudWatchLogs: new AWS.CloudWatchLogs(),
-    logGroupName: "testing",
-    logStreamName: "first",
-    awsSecretKey: "ILWyzscCzvLF7FvQY2hXYusGP+I4q2aZRf9hVcVT",
-    awsAccessKeyId: "AKIAIE6EQ4JM46RVSAKA",
+    logGroupName: config.awsCloudWatch.groupName,
+    logStreamName: config.awsCloudWatch.streamName,
+    awsSecretKey: config.awsCloudWatch.awsSecretKey,
+    awsAccessKeyId: config.awsCloudWatch.awsAccessKey,
     level: "debug",
   })
 );

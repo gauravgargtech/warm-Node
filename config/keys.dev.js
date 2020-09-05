@@ -26,4 +26,10 @@ module.exports = {
     from: "",
     port: 587,
   },
+  awsCloudWatch: {
+    groupName: "",
+    streamName: "",
+    awsSecretKey: "",
+    awsAccessKey: "",
+  },
 };

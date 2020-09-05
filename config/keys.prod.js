@@ -26,4 +26,10 @@ module.exports = {
     from: process.env.email_from,
     port: process.env.email_port,
   },
+  awsCloudWatch: {
+    groupName: process.env.cloudwatch_groupname,
+    streamName: process.env.cloudwatch_streamname,
+    awsSecretKey: process.env.cloudwatch_secretkey,
+    awsAccessKey: process.env.cloudwatch_accesskey,
+  },
 };
