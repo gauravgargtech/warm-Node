@@ -22,7 +22,6 @@ app.set("port", port);
  */
 
 if (cluster.isMaster) {
-  
   for (let i = 0; i < os.cpus().length; i++) {
     cluster.fork();
   }
@@ -32,7 +31,7 @@ if (cluster.isMaster) {
   });
   cluster.on("exit", (worker) => {
     console.log("Process - " + worker.process.pid + " died");
-   // cluster.fork();
+    cluster.fork();
   });
 } else {
   var server = http.createServer(app);
