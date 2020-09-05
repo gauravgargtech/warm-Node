@@ -16,49 +16,56 @@ const minify = require("express-minify");
 const googleStrategy = require("./adapters/passportAdapter");
 const passport = require("passport");
 const bodyParser = require("body-parser");
+const async = require("async");
+const config = require("./config/keys");
 
 var app = express();
 
 //const csrfProtection = csrf();
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
 
-app.use(logger("dev"));
-app.use(
+function parallel(middleware) {
+  return (req, res, next) => {
+    async.each(
+      middleware,
+      (func, cb) => {
+        func(req, res, cb);
+      },
+      next
+    );
+  };
+}
+const middlewares = [
+  logger("dev"),
+  bodyParser.json(),
   bodyParser.urlencoded({
     extended: false,
-  })
-);
-app.use(bodyParser.json());
+  }),
+  cookieParser(),
+  ejsLayouts,
+  helmet(),
+  flash(),
+];
 
-app.use(cookieParser());
-app.use(ejsLayouts);
-app.use(helmet());
-//app.use(compression());
-//app.use(minify());
+app.use(parallel(middlewares));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-
-/*
-app.use(minify({
-  cache: true,
-  uglifyJsModule: null,
-  errorHandler: null,
-  jsMatch: /js/,
-  cssMatch: /css/,
-  jsonMatch: /json/,
-  sassMatch: /scss/,
-  lessMatch: /less/,
-  stylusMatch: /css/,
-  coffeeScriptMatch: /coffeescript/,
-}));
-*/
-
-//app.use(csrfProtection);
+app.use(csrfProtection);
 
 var store = new mongoSession({
   uri:
-    "mongodb+srv://gaurav:gaurav@emaily.1vibt.mongodb.net/emaily?retryWrites=true&w=majority",
+    config.mongo.scheme +
+    "://" +
+    config.mongo.username +
+    ":" +
+    config.mongo.password +
+    "@" +
+    config.mongo.host +
+    "/" +
+    config.mongo.database +
+    "?retryWrites=true&w=majority",
   collection: "mySessions",
 });
 
@@ -72,8 +79,6 @@ app.use(
   })
 );
 
-app.use(flash());
-
 app.use((req, res, next) => {
   res.locals = {
     isUser: req.session.userId,
@@ -82,14 +87,12 @@ app.use((req, res, next) => {
   next();
 });
 
-/*
 app.use(
   cookieSession({
     name: "session",
-    keys: ["8fhgjhjgjgjh687", "jgjj2"],
+    keys: [config.cookieKey],
   })
 );
-*/
 
 app.use(
   minifyHTML({
@@ -110,8 +113,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//const indexer = require("./routes/index");
-
 app.use("/", require("./routes/index"));
 require("./routes/users")(app);
 require("./routes/account")(app);
@@ -130,6 +131,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
+  console.log("-----ERROR  by EXPRESS --------------------------------");
   res.status(err.status || 500);
   res.render("error");
 });

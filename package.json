@@ -7,8 +7,12 @@
     "test": "mocha"
   },
   "dependencies": {
+    "async": "^3.2.0",
+    "aws-sdk": "^2.738.0",
     "body-parser": "^1.19.0",
+    "cabin": "^8.0.7",
     "chai": "^4.2.0",
+    "cluster": "^0.7.7",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.3.3",
@@ -28,18 +32,24 @@
     "http-errors": "~1.6.3",
     "https-localhost": "^4.6.2",
     "lodash": "^4.17.19",
+    "log4js": "^6.3.0",
+    "log4js-cloudwatch-appender": "^1.1.0",
     "md5": "^2.2.1",
     "mocha": "^8.0.1",
     "morgan": "~1.9.1",
     "mysql2": "^2.1.0",
+    "node-cache": "^5.1.2",
     "node-minify": "^3.6.0",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "object-to-json": "0.0.5",
+    "os": "^0.1.1",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "sequelize": "^6.3.3",
-    "striptags": "^3.1.1"
+    "striptags": "^3.1.1",
+    "winston": "^3.3.3",
+    "winston-cloudwatch": "^2.3.2"
   }
 }

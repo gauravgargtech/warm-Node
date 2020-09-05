@@ -1,0 +1,29 @@
+module.exports = {
+  port: process.env.PORT,
+  mysql: {
+    host: process.env.mysql_host,
+    username: process.env.mysql_username,
+    password: process.env.mysql_password,
+    database: process.env.mysql_database,
+    port: process.env.mysql_port,
+  },
+  mongo: {
+    scheme: process.env.mongo_scheme,
+    username: process.env.mongo_username,
+    host: process.env.mongo_host,
+    password: process.env.mongo_password,
+    database: process.env.mongo_database,
+  },
+  googleKeys: {
+    clientId: process.env.google_client_id,
+    clientSecret: process.env.google_secret_id,
+  },
+  cookieKey: process.env_cookie_key,
+  email: {
+    host: process.env.email_host,
+    username: process.env.email_username,
+    password: process.env.email_password,
+    from: process.env.email_from,
+    port: process.env.email_port,
+  },
+};
