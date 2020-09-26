@@ -9,7 +9,6 @@ var debug = require("debug")("warm-node:server");
 var http = require("http");
 const cluster = require("cluster");
 const os = require("os");
-var dash = require("appmetrics-dash");
 
 /**
  * Get port from environment and store in Express.
@@ -23,7 +22,7 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
-dash.monitor({ server: server });
+
 if (cluster.isMaster) {
   for (let i = 0; i < os.cpus().length; i++) {
     cluster.fork();
