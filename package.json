@@ -28,6 +28,12 @@
     "express-minify-html": "^0.12.0",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.0",
-    "helmet": "^3.23.3"
+    "helmet": "^3.23.3",
+    "http-errors": "~1.6.3",
+    "https-localhost": "^4.6.2",
+    "lodash": "^4.17.19",
+    "log4js": "^6.3.0",
+    "log4js-cloudwatch-appender": "^1.1.0",
+    "md5": "^2.2.1"
   }
 }
