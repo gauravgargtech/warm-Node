@@ -3199,7 +3199,6 @@ table.colorPickerTable th { padding: 0 !important; }
 .texture_bg_8  { background-image:url(../images/bg/texture_8.png); }
 .texture_bg_9  { background-image:url(../images/bg/texture_9.png); }
 .texture_bg_10 { background-image:url(../images/bg/texture_10.png); }
-.texture_bg_11 { background-image:url(../images/bg/texture_11.png); }
 .texture_bg_12 { background-image:url(../images/bg/texture_12.png); }
 
 .overlay_bg_1:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; background-image:url(../images/bg/texture_1.png); }
@@ -3212,7 +3211,7 @@ table.colorPickerTable th { padding: 0 !important; }
 .overlay_bg_8:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; background-image:url(../images/bg/texture_8.png); }
 .overlay_bg_9:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; background-image:url(../images/bg/texture_9.png); }
 .overlay_bg_10:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; background-image:url(../images/bg/texture_10.png); }
-.overlay_bg_11:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; background-image:url(../images/bg/texture_11.png); }
+.overlay_bg_11:after  { content:' '; position:absolute; left:0; top:0; right:0; bottom:0; }
 
 .bg_pattern_1 { background: url(../images/bg/pattern_1.png) 50% 50% repeat fixed;}
 .bg_pattern_2 { background: url(../images/bg/pattern_2.png) 50% 50% repeat fixed;}

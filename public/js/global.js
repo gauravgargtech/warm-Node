@@ -131,7 +131,7 @@ var THEMEREX_sound_enable = true;
 var THEMEREX_sound_folder = 'js/sounds/lib/swf/';
 var THEMEREX_sound_mainmenu = 'media/l9.mp3';
 var THEMEREX_sound_othermenu = 'media/l2.mp3';
-var THEMEREX_sound_buttons = 'media/mouseover3.mp3';
+var THEMEREX_sound_buttons = '';
 var THEMEREX_sound_links = 'media/l6.mp3';
 var THEMEREX_sound_state = {
 	all: THEMEREX_sound_enable ? 1 : 0,

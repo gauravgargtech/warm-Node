@@ -42,7 +42,7 @@
                         <span class="sc_price_currency">$</span>
                         <div class="sc_price_money">
                           <del>5</del>
-                          <span style="color: #e33c1c; font-size: 25px;"
+                          <span style="color: #e33c1c; font-size: 25px"
                             >Free</span
                           >
                         </div>
@@ -65,19 +65,11 @@
                       >
                         <button
                           class="btn btn-primary"
-                          onclick="window.location = '/users/register/1'"
+                          onclick="window.location = '/register'"
                         >
-                          <?php
-                                                    if (!empty($planId)) {
-                                                        if ($planId == 1) {
-                                                            echo 'Current Plan';
-                                                        } else {
-                                                            echo 'Downgrade';
-                                                        }
-                                                    } else {
-                                                        echo 'Sign Up';
-                                                    }
-                                                    ?>
+                          <% if(typeof planId != 'undefined' && planId >0) { if (planId == 1)
+                          { %> Current Plan <% } else { %> Downgrade <% } } else
+                          { %> Sign Up <% } %>
                         </button>
                       </div>
                     </li>
@@ -91,7 +83,7 @@
                         <span class="sc_price_currency">$</span>
                         <div class="sc_price_money">
                           <del>10</del>
-                          <span style="color: #e33c1c; font-size: 25px;"
+                          <span style="color: #e33c1c; font-size: 25px"
                             >Free</span
                           >
                         </div>
@@ -114,19 +106,12 @@
                       >
                         <button
                           class="btn btn-primary"
-                          onclick="window.location = '/users/register/2'"
+                          onclick="window.location = '/register'"
                         >
-                          <?php
-                                                    if (!empty($planId)) {
-                                                        if ($planId == 2) {
-                                                            echo 'Current Plan';
-                                                        } else {
-                                                            echo 'Upgrade';
-                                                        }
-                                                    } else {
-                                                        echo 'Sign Up';
-                                                    }
-                                                    ?>
+                        <% if(typeof planId != 'undefined' && planId >0) { if (planId == 1)
+                          { %> Current Plan <% } else { %> Downgrade <% } } else
+                          { %> Sign Up <% } %>
+
                         </button>
                       </div>
                     </li>
@@ -140,7 +125,7 @@
                         <span class="sc_price_currency">$</span>
                         <div class="sc_price_money">
                           <del>15</del>
-                          <span style="color: #e33c1c; font-size: 25px;"
+                          <span style="color: #e33c1c; font-size: 25px"
                             >Free</span
                           >
                         </div>
@@ -160,7 +145,7 @@
                     <li class="sc_pricing_data sc_pricing_footer">
                       <div
                         class="sc_button sc_button_style_global sc_button_size_medium squareButton global medium margin_top_30"
-                        style="margin-top: 20px;"
+                        style="margin-top: 20px"
                       >
                         Coming Soon
                       </div>

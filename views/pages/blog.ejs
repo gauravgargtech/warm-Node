@@ -1,0 +1,73 @@
+<div class="widgetTabs">
+  <!-- Page Title -->
+  <div id="topOfPage" class="topTabsWrap">
+    <div class="main">
+      <h3 class="pageTitle h3">Blog Section</h3>
+      <div class="tabsButton"></div>
+    </div>
+  </div>
+  <!-- /Page Title -->
+  <div class="mainWrap without_sidebar">
+    <div class="main">
+      <div class="content">
+        <!-- Tab Blog -->
+        <aside id="tabBlog" class="blogContent">
+          <% if (allBlogs) { for (i in allBlogs) { %>
+          <article class="postRight hrShadow even post">
+            <div class="post_info infoPost">
+              <span class="post_cats">&nbsp; </span>
+            </div>
+            <div class="sc_section columns1_2 sc_alignright">
+              <div class="">
+                <div id="sc_zoom_10" class="">
+                  <a href="/blog/<%= allBlogs[i].url %>">
+                    <img
+                      src="<%= allBlogs[i].image %>"
+                      data-zoom-image="<%= allBlogs[i].image %>"
+                      alt=""
+                      style="height: 300px"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <h2 class="post_title">
+              <a href="/blog/<%= allBlogs[i].url %>"
+                ><%= allBlogs[i].title %></a
+              >
+            </h2>
+            <div class="postStandard">
+              <div class="sc_section">
+                <%= allBlogs[i].body.replace(/(<([^>]+)>)/gi, "").toString().substring(0,800) %>
+              </div>
+            </div>
+            <div class="postSharing">
+              <ul>
+                <li class="squareButton light ico">
+                  <a
+                    class="icon-link"
+                    title="More"
+                    href="/blog/<%= allBlogs[i].url %>"
+                    >Read More</a
+                  >
+                </li>
+                <li class="squareButton light ico">
+                  <a class="icon-eye" title="Views - 21" href="#">21</a>
+                </li>
+                <li class="squareButton light ico">
+                  <a class="icon-comment-1" title="Comments - 0" href="#">0</a>
+                </li>
+                <li class="squareButton light ico likeButton like">
+                  <a class="icon-heart-1" title="Like - 0" href="#">
+                    <span class="likePost">0</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </article>
+          <% } } %>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>

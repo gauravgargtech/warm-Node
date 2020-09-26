@@ -37,6 +37,7 @@
     "md5": "^2.2.1",
     "mocha": "^8.0.1",
     "morgan": "~1.9.1",
+    "morgan-body": "^2.5.1",
     "mysql2": "^2.1.0",
     "node-cache": "^5.1.2",
     "node-minify": "^3.6.0",

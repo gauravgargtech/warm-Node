@@ -3,19 +3,18 @@ const path = require("path");
 const NodeCache = require("node-cache");
 const logger = require("../common/logger");
 const fs = require("fs");
+const sequelize = require("../adapters/mysql");
+const blogModel = require("../models/blogs")(sequelize);
 
 module.exports = {
   home: (req, res) => {
     //req.logger.info("Startig up ");
     //req.logger.warn('this is warning');
-    logger.debug(" This is first error logger");
+    //logger.debug(" This is first error logger");
     console.log(req.session, req.session.userId);
     res.render("index");
   },
   plans: (req, res) => {
-    const read = fs.createReadStream('kjhkjhjk.txt');
-    console.log(read);
-    logger.debug(' this is data fff');
     res.render("pages/plans");
   },
   policy: (req, res) => {
@@ -50,5 +49,27 @@ module.exports = {
       });
 
     res.render("pages/contact");
+  },
+
+  blog: async (req, res) => {
+    let blogs = await blogModel.findAll({
+      raw: true,
+    });
+    res.render("pages/blog", {
+      allBlogs: blogs,
+    });
+  },
+
+  blogDetail: async (req, res) => {
+    const urlParts = req.url.split("/");
+    let blog = await blogModel.findAll({
+      where: {
+        url: urlParts[2],
+      },
+      raw: true,
+    });
+    res.render("pages/blog_detail", {
+      blogDetail: blog,
+    });
   },
 };

@@ -7,10 +7,16 @@ const commonLogin = require("../common/login");
 
 module.exports = (app) => {
   /* GET users listing. */
-  app.get("/login", csrfProtestion, userController.login);
+  app.get(
+    "/login",
+    commonLogin.checkAuth,
+    csrfProtestion,
+    userController.login
+  );
 
   app.post(
     "/login",
+    commonLogin.checkAuth,
     csrfProtestion,
     check("email").isEmail().withMessage("Please enter valid email"),
     check("password")
@@ -21,9 +27,18 @@ module.exports = (app) => {
 
   app.get("/logout", userController.logout);
 
-  app.get("/register", csrfProtestion, userController.register);
+  app.get(
+    "/register",
+    commonLogin.checkAuth,
+    csrfProtestion,
+    userController.register
+  );
 
-  app.post("/register", userController.performRegistration);
+  app.post(
+    "/register",
+    commonLogin.checkAuth,
+    userController.performRegistration
+  );
 
   app.get(
     "/auth/google",

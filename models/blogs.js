@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -11,7 +9,7 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: false,
       comment: null,
-      field: "id"
+      field: "id",
     },
     title: {
       type: DataTypes.STRING(245),
@@ -20,7 +18,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "title"
+      field: "title",
     },
     image: {
       type: DataTypes.STRING(245),
@@ -29,7 +27,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "image"
+      field: "image",
     },
     video: {
       type: DataTypes.STRING(245),
@@ -38,7 +36,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "video"
+      field: "video",
     },
     body: {
       type: DataTypes.TEXT,
@@ -47,7 +45,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "body"
+      field: "body",
     },
     small_title: {
       type: DataTypes.STRING(245),
@@ -56,7 +54,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "small_title"
+      field: "small_title",
     },
     created_at: {
       type: DataTypes.STRING(45),
@@ -65,7 +63,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "created_at"
+      field: "created_at",
     },
     url: {
       type: DataTypes.STRING(145),
@@ -74,13 +72,14 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "url"
-    }
+      field: "url",
+    },
   };
   const options = {
     tableName: "blogs",
     comment: "",
-    indexes: []
+    indexes: [],
+    timestamps: false,
   };
   const BlogsModel = sequelize.define("blogs_model", attributes, options);
   return BlogsModel;

@@ -19,4 +19,8 @@ router.get("/terms-and-conditions", homeController.terms);
 
 router.get("/contact", homeController.contact);
 
+router.get("/blog", homeController.blog);
+
+router.get("/blog/:url", homeController.blogDetail);
+
 module.exports = router;

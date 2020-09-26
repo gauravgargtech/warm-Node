@@ -534,7 +534,7 @@ header.fixedTopMenu .topWrap .logo img { height:35px; }
 
 /* Footer
 ------------------------------------------------------------------- */
-.footerWrap.footerStyleLight { background:#f9f9f9 url(../../images/bg/texture_11.png) repeat; border:none; }
+.footerWrap.footerStyleLight { background:#f9f9f9; border:none; }
 
 .contactFooterWrap.footerStyleLight { background:#ffffff;  }
 .contactFooter .logo img { height: 62px; }

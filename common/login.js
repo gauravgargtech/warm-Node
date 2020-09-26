@@ -1,18 +1,21 @@
 const _ = require("lodash");
 const sequelize = require("../adapters/mysql");
-//const { result } = require("lodash");
 const UserModel = require("../models/users")(sequelize);
 const md5 = require("md5");
 
 module.exports = {
   setLogin: (result, req, res) => {
+    console.log(
+      "--------------------------------------------------------------------------"
+    );
     if (_.isEmpty(result)) {
       req.flash("loginError", "Either email or password is wrong");
       return res.redirect("/login");
     } else {
       console.log(typeof result);
       req.session.userId = result[0].id;
-      return res.redirect("/");
+      req.session.planId = result[0].plan_id;
+      return res.redirect("/notes");
     }
   },
 
@@ -49,9 +52,13 @@ module.exports = {
   },
 
   checkAuth: (req, res, next) => {
-    //console.log(req.session.userId);
-    if (!req.session.userId) {
+    const publicUrls = ["/login", "/register"];
+    const userUrl = ["/notes"];
+
+    if (!req.session.userId && !publicUrls.includes(req.url)) {
       return res.redirect("/login");
+    } else if (req.session.userId && publicUrls.includes(req.url)) {
+      return res.redirect("/notes");
     }
     next();
   },

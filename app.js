@@ -4,55 +4,32 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const ejsLayouts = require("express-ejs-layouts");
-const compression = require("compression");
 const helmet = require("helmet");
 var minifyHTML = require("express-minify-html");
-const mysql = require("./adapters/mysql");
 const session = require("express-session");
 const mongoSession = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const csrf = require("csurf");
-const minify = require("express-minify");
 const googleStrategy = require("./adapters/passportAdapter");
 const passport = require("passport");
 const bodyParser = require("body-parser");
-const async = require("async");
 const config = require("./config/keys");
 
 var app = express();
 
-//const csrfProtection = csrf();
-// view engine setup
-
-function parallel(middleware) {
-  return (req, res, next) => {
-    async.each(
-      middleware,
-      (func, cb) => {
-        func(req, res, cb);
-      },
-      next
-    );
-  };
-}
-const middlewares = [
-  logger("dev"),
-  bodyParser.json(),
+app.use(bodyParser.json());
+app.use(
   bodyParser.urlencoded({
     extended: false,
-  }),
-  cookieParser(),
-  ejsLayouts,
-  helmet(),
-  flash(),
-];
-
-app.use(parallel(middlewares));
+  })
+);
+app.use(cookieParser());
+app.use(ejsLayouts);
+app.use(helmet());
+app.use(flash());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
-app.use(csrfProtection);
 
 var store = new mongoSession({
   uri:
@@ -69,7 +46,7 @@ var store = new mongoSession({
   collection: "mySessions",
 });
 
-//app.set("trust proxy", 1); // trust first proxy
+app.set("trust proxy", 1); // trust first proxy
 app.use(
   session({
     secret: "keyboardjjj",
@@ -79,20 +56,25 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  res.locals = {
-    isUser: req.session.userId,
-    websiteTitle: "Warmnotes - everyone deserves a chance to say Goodbye",
-  };
-  next();
-});
+app.use(passport.initialize());
+//app.use(passport.session());
 
-app.use(
-  cookieSession({
-    name: "session",
-    keys: [config.cookieKey],
-  })
-);
+var conditionalCSRF = function (req, res, next) {
+  const csrfDisabledRoutes = [
+    "/account/populate_states",
+    "/account/populate_cities",
+  ];
+  let needCSRF = !csrfDisabledRoutes.includes(req.url);
+  //compute needCSRF here as appropriate based on req.path or whatever
+  if (needCSRF) {
+    csrf({ cookie: true });
+  }
+  next();
+};
+
+app.use(conditionalCSRF);
+
+app.use(express.static(__dirname + "/public"));
 
 app.use(
   minifyHTML({
@@ -110,8 +92,14 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals = {
+    isUser: req.session.userId ? req.session.userId : "",
+    websiteTitle: "Warmnotes - everyone deserves a chance to say Goodbye",
+    planId: req.session.planId ? req.session.planId : 0,
+  };
+  next();
+});
 
 app.use("/", require("./routes/index"));
 require("./routes/users")(app);
@@ -131,6 +119,8 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
+  console.log(err);
+  console.log(err.message);
   console.log("-----ERROR  by EXPRESS --------------------------------");
   res.status(err.status || 500);
   res.render("error");

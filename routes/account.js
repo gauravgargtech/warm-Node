@@ -24,4 +24,13 @@ module.exports = (app) => {
 
   app.get("/reminder", commonLogin.checkAuth, accountController.getReminder);
   app.post("/reminder", commonLogin.checkAuth, accountController.setReminder);
+
+  app.get(
+    "/account/populate_states",
+    accountController.populateStates
+  );
+  app.get(
+    "/account/populate_cities",
+    accountController.populateCities
+  );
 };

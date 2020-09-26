@@ -1,0 +1,62 @@
+<script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({ widget: "Comment", id: 25434 });
+  (function () {
+    if ("WIDGETPACK_LOADED" in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement("script");
+    mc.type = "text/javascript";
+    mc.async = true;
+    mc.src = "https://embed.widgetpack.com/widget.js";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+</script>
+<div class="widgetTabs">
+  <!-- Page Title -->
+  <div id="topOfPage" class="topTabsWrap">
+    <div class="main">
+      <div class="speedBar">
+        <a class="home" href="/">Home</a>
+        <span class="breadcrumbs_delimiter"> / </span>
+        <a class="all" href="/blog">All Blogs</a>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Title -->
+  <div class="mainWrap without_sidebar">
+    <div class="main">
+      <div class="content">
+        <!-- Tab Blog -->
+        <aside id="tabBlog" class="blogContent">
+          <div>
+            <section class="post hrShadow">
+              <article class="post_content">
+                <div class="post_info infoPost"></div>
+                <div
+                  class="sc_section sc_alignright columns2_3 margin_bottom_2em_imp"
+                >
+                  <div
+                    class="sc_video_player"
+                    data-width="100%"
+                    data-height="295 width_100per height_316"
+                  >
+                    <div class="sc_video_player_title"></div>
+                    <div class="">
+                      <img alt="" src="<%= blogDetail[0].image %>" />
+                    </div>
+                  </div>
+                </div>
+                <h1 class="post_title entry-title">
+                  <%= blogDetail[0].title %>
+                </h1>
+                <div class="post_text_area"><%- blogDetail[0].body %></div>
+              </article>
+            </section>
+          </div>
+        </aside>
+        <div id="wpac-comment"></div>
+      </div>
+    </div>
+  </div>
+</div>
