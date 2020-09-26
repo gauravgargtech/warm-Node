@@ -31,7 +31,12 @@
     "helmet": "^3.23.3",
     "http-errors": "~1.6.3",
     "https-localhost": "^4.6.2",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "log4js": "^6.3.0",
+    "log4js-cloudwatch-appender": "^1.1.0",
+    "md5": "^2.2.1",
+    "mocha": "^8.0.1",
+    "morgan": "~1.9.1"
     
   }
 }
