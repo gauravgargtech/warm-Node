@@ -18,7 +18,7 @@ module.exports = {
     clientId: process.env.google_client_id,
     clientSecret: process.env.google_secret_id,
   },
-  cookieKey: process.env_cookie_key,
+  cookieKey: process.env.cookie_key,
   email: {
     host: process.env.email_host,
     username: process.env.email_username,
