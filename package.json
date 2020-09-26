@@ -42,7 +42,15 @@
     "node-cache": "^5.1.2",
     "node-minify": "^3.6.0",
     "nodemailer": "^6.4.11",
-    "nodemon": "^2.0.4"
-    
+    "nodemon": "^2.0.4",
+    "object-to-json": "0.0.5",
+    "os": "^0.1.1",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "sequelize": "^6.3.3",
+    "striptags": "^3.1.1",
+    "winston": "^3.3.3",
+    "winston-cloudwatch": "^2.3.2"
   }
 }
