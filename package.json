@@ -39,6 +39,7 @@
     "morgan": "~1.9.1",
     "morgan-body": "^2.5.1",
     "mysql2": "^2.1.0",
+    "node-cache": "^5.1.2",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "object-to-json": "0.0.5",
