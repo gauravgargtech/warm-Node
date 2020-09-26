@@ -17,6 +17,8 @@ const config = require("./config/keys");
 
 var app = express();
 
+console.log(config);
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
