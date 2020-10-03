@@ -5,14 +5,13 @@ const md5 = require("md5");
 
 module.exports = {
   setLogin: (result, req, res) => {
-    console.log(
-      "--------------------------------------------------------------------------"
-    );
+
     if (_.isEmpty(result)) {
       req.flash("loginError", "Either email or password is wrong");
       return res.redirect("/login");
     } else {
       console.log(typeof result);
+
       req.session.userId = result[0].id;
       req.session.planId = result[0].plan_id;
       return res.redirect("/notes");
@@ -52,7 +51,7 @@ module.exports = {
   },
 
   checkAuth: (req, res, next) => {
-    const publicUrls = ["/login", "/register"];
+    const publicUrls = ["/login", "/register", "/forgot"];
     const userUrl = ["/notes"];
 
     if (!req.session.userId && !publicUrls.includes(req.url)) {

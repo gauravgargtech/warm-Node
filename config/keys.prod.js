@@ -32,4 +32,16 @@ module.exports = {
     awsSecretKey: process.env.cloudwatch_secretkey,
     awsAccessKey: process.env.cloudwatch_accesskey,
   },
+  googleKeys: {
+    clientId: process.env.googleKey_clientID,
+    clientSecret: process.env.googleKey_clientSecret,
+  },
+  twitterKeys: {
+    consumerKey: process.env.twitterKey_consumerKey,
+    consumerSecret: process.env.twitterKey_consumerSecret,
+  },
+  facebookKeys: {
+    clientId: process.env.facebookKey_clientID,
+    clientSecret: process.env.facebookKey_clientSecret,
+  },
 };

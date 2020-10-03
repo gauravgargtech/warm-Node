@@ -8,12 +8,12 @@ const lodash = require("lodash");
 
 const noteTypes = [
   "Financial Note",
-  "Gooddbye to Wifey",
-  "Goodbye to Hubby",
-  "Goodbye to Kids",
-  "Goodbye to Family",
-  "Thanking Colleagues",
-  "Goodbye to Friends",
+  "Note to Wifey",
+  "Note to Hubby",
+  "Note to Kids",
+  "Note to Family",
+  "Note Colleagues",
+  "Note to Friends",
   "Other",
 ];
 
@@ -26,6 +26,7 @@ module.exports = {
     return res.render("notes/index", {
       notes: notes,
       noteTypes: noteTypes,
+      tab: "notes",
       errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : "",
     });
   },
@@ -53,6 +54,7 @@ module.exports = {
       }),
       notesContacts: notesContacts,
       noteDetails: noteDetails,
+      tab: "notes",
     });
   },
 

@@ -46,6 +46,40 @@ module.exports = (app) => {
       scope: ["profile", "email"],
     })
   );
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("twitter", { failureRedirect: "/login" }),
+    async function (req, res) {
+      await commonLogin.setLogin(req.user, req, res);
+      res.redirect("/");
+    }
+  );
+
+  app.get("/auth/twitter", passport.authenticate("twitter"));
+  app.get(
+    "/auth/twitter/callback",
+    passport.authenticate("twitter", { failureRedirect: "/login" }),
+    async function (req, res) {
+      await commonLogin.setLogin(req.user, req, res);
+      res.redirect("/");
+    }
+  );
+
+  app.get(
+    "/auth/facebook",
+    passport.authenticate("facebook", {
+      scope: ["email"],
+    })
+  );
+
+  app.get(
+    "/auth/facebook/callback",
+    passport.authenticate("facebook", { failureRedirect: "/login" }),
+    async function (req, res) {
+      await commonLogin.setLogin(req.user, req, res);
+      res.redirect("/");
+    }
+  );
 
   app.get(
     "/auth/google/callback",
@@ -53,5 +87,20 @@ module.exports = (app) => {
     (req, res) => {
       commonLogin.setLogin(req.user, req, res);
     }
+  );
+
+  app.get(
+    "/forgot",
+    commonLogin.checkAuth,
+    csrfProtestion,
+    userController.forgotPassword
+  );
+
+  app.post(
+    "/forgot",
+    commonLogin.checkAuth,
+    check("email").isEmail().withMessage("Please enter valid email"),
+    csrfProtestion,
+    userController.forgotPasswordSubmit
   );
 };

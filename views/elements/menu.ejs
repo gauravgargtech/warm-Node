@@ -1,16 +1,16 @@
 <nav class="navbar navbar-default main">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li class="active">
+      <li <%= tab=='account' ? 'class=active'  : ''; %>>
         <a href="/account">My Account</a>
       </li>
-      <li>
+      <li <%= tab=='notes' ? 'class=active'  : ''; %>>
         <a href="/notes">My Notes</a>
       </li>
-      <li>
+      <li <%= tab=='contacts' ? 'class=active'  : ''; %>>
         <a href="/contacts">My Contacts</a>
       </li>
-      <li>
+      <li <%= tab=='reminder' ? 'class=active'  : ''; %>>
         <a href="/reminder">Reminder Settings</a>
       </li>
     </ul>

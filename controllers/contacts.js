@@ -27,6 +27,7 @@ module.exports = {
       allContacts: userContacts,
       relations: relations,
       errorMessage: message,
+      tab: "contacts",
     });
   },
 

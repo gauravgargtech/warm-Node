@@ -2,7 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+var logger = require("./common/logger");
 const ejsLayouts = require("express-ejs-layouts");
 const helmet = require("helmet");
 var minifyHTML = require("express-minify-html");
@@ -10,12 +10,15 @@ const session = require("express-session");
 const mongoSession = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const csrf = require("csurf");
-const googleStrategy = require("./adapters/passportAdapter");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
 
-var app = express();
+const router = express.Router();
+const passportAdapter = require("./adapters/passportAdapter");
+
+//const app = require("https-localhost")();
+const app = express();
 
 app.use(bodyParser.json());
 app.use(
@@ -98,6 +101,7 @@ app.use((req, res, next) => {
     websiteTitle: "Warmnotes - everyone deserves a chance to say Goodbye",
     planId: req.session.planId ? req.session.planId : 0,
   };
+  logger.info("Url : " + req.originalUrl);
   next();
 });
 
@@ -109,19 +113,17 @@ require("./routes/contacts")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  logger.error(req.originalUrl);
   next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
+  logger.error("Error occured : ");
+  logger.error(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  console.log(err);
-  console.log(err.message);
-  console.log("-----ERROR  by EXPRESS --------------------------------");
   res.status(err.status || 500);
   res.render("error");
 });

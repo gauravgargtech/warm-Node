@@ -7,6 +7,7 @@ router.use(function timeLog(req, res, next) {
   console.log("Url : ", req.url);
   next();
 });
+
 router.get("/", homeController.home);
 
 router.get("/plans", homeController.plans);

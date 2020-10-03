@@ -8,11 +8,9 @@ const blogModel = require("../models/blogs")(sequelize);
 
 module.exports = {
   home: (req, res) => {
-    //req.logger.info("Startig up ");
-    //req.logger.warn('this is warning');
-    //logger.debug(" This is first error logger");
-    console.log(req.session, req.session.userId);
-    res.render("index");
+    res.render("index", {
+      csrfToken: "j"
+    });
   },
   plans: (req, res) => {
     res.render("pages/plans");

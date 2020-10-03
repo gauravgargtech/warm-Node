@@ -5,6 +5,10 @@ const lodash = require("lodash");
 const commonLogin = require("../common/login");
 const { validationResult } = require("express-validator");
 const functions = require("../common/functions");
+const email = require("../adapters/mailer");
+const Cryptr = require("cryptr");
+const { reset } = require("nodemon");
+const cryptr = new Cryptr("jhgjh786786y87hbj");
 
 module.exports = {
   login: (req, res) => {
@@ -36,10 +40,7 @@ module.exports = {
       raw: true,
     });
 
-    console.log("then block");
     await commonLogin.setLogin(result, req, res);
-
-    console.log("how this came");
 
     /*
     UserModel.create({
@@ -66,7 +67,7 @@ module.exports = {
 
   register: (req, res) => {
     let errorMessage = req.flash("registerError");
-    console.log(errorMessage);
+
     res.render("users/register", {
       errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : false,
       csrfToken: req.csrfToken(),
@@ -87,5 +88,57 @@ module.exports = {
         req.flash("registerError", "This email already exists");
         return res.redirect("register");
       });
+  },
+
+  forgotPassword: (req, res) => {
+    let errorMessage = req.flash("loginError");
+
+    res.render("users/forgot", {
+      errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : false,
+      csrfToken: req.csrfToken(),
+    });
+  },
+
+  forgotPasswordSubmit: async (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).render("users/forgot", {
+        errorMessage: errors.array()[0].msg,
+        csrfToken: req.csrfToken(),
+      });
+    }
+
+    let email = req.body.email;
+
+    result = await UserModel.findAll({
+      where: {
+        email: email,
+      },
+      raw: true,
+    });
+
+    if (lodash.isEmpty(result)) {
+      req.flash("loginError", "Provided email is not regisreted");
+      return res.redirect("/forgot");
+    } else {
+      const resetLink = req.hostname + "/reset/" + cryptr.encrypt(email);
+
+      email
+        .send({
+          template: "forgot",
+          message: {
+            to: email,
+          },
+          locals: {
+            resetLink: resetLink,
+          },
+        })
+        .then(console.log)
+        .catch(console.error);
+    }
+    res.render("users/forgot", {
+      errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : false,
+      csrfToken: req.csrfToken(),
+    });
   },
 };

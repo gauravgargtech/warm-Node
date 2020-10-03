@@ -1,7 +1,28 @@
-const winston = require("winston"),
-  WinstonCloudWatch = require("winston-cloudwatch");
+const winston = require("winston");
 const config = require("../config/keys");
 
+const { format } = require("winston");
+
+const { combine, timestamp, json, errors, metadata } = format;
+
+const logger = winston.createLogger({
+  level: "info",
+  format: combine(
+    errors({ stack: true }),
+    timestamp(),
+    json(),
+    metadata()
+  ),
+  transports: [
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+    new winston.transports.File({ filename: "combined.log" }),
+  ],
+  rejectionHandlers: [new winston.transports.File({ filename: "rejections.log" })],
+});
+
+module.exports = logger;
+
+/*
 const AWS = require("aws-sdk");
 
 AWS.config.update({
@@ -20,3 +41,4 @@ winston.add(
 );
 
 module.exports = winston;
+*/

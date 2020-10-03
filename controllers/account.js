@@ -25,7 +25,6 @@ module.exports = {
   account: async (req, res) => {
     userId = req.session.userId;
 
-    console.log(userId);
     var errorMessage = req.flash("accountError");
 
     let userDetails = await commonLogin.getUserById(userId);
@@ -36,6 +35,7 @@ module.exports = {
       countries: countries,
       userDetails: userDetails,
       errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : null,
+      tab: "account",
     });
   },
 
@@ -55,7 +55,6 @@ module.exports = {
       return res.redirect("/account");
     }
 
-    console.log(req.body);
     UserModel.update(
       {
         first_name: req.body.first_name,
@@ -89,11 +88,11 @@ module.exports = {
     commonLogin
       .getUserById(userId)
       .then((result) => {
-        console.log(result);
         return res.render("users/reminder", {
           userDetails: result,
           remindMonths: remindMonths,
           forDays: forDays,
+          tab: "reminder",
         });
       })
       .catch((err) => {});
