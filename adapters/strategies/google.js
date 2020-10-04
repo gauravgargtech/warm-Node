@@ -17,10 +17,11 @@ passport.use(
     {
       clientID: config.googleKeys.clientId,
       clientSecret: config.googleKeys.clientSecret,
-      callbackURL: "/auth/google/callback",
+      callbackURL: config.domain + "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       let email = profile.emails[0].value;
+
       commonLogin.checkUserByEmail(email).then((userDetails) => {
         if (!_.isEmpty(userDetails)) {
           return done(null, userDetails);
