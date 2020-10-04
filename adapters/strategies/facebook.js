@@ -3,7 +3,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const commonLogin = require("../../common/login");
 const _ = require("lodash");
 const config = require("../../config/keys");
-const logger = require('../../common/logger');
+const logger = require("../../common/logger");
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -18,7 +18,7 @@ passport.use(
     {
       clientID: config.facebookKeys.clientId,
       clientSecret: config.facebookKeys.clientSecret,
-      callbackURL: "/auth/facebook/callback/",
+      callbackURL: config.domain + "/auth/facebook/callback",
       profileFields: ["id", "emails", "name"],
     },
     function (accessToken, refreshToken, profile, done) {

@@ -1,4 +1,5 @@
 module.exports = {
+  domain: process.env.domain,
   port: process.env.PORT,
   mysql: {
     host: process.env.mysql_host,
