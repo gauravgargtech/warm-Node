@@ -103,4 +103,5 @@ module.exports = (app) => {
     csrfProtestion,
     userController.forgotPasswordSubmit
   );
+
 };

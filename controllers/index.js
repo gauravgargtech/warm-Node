@@ -5,11 +5,16 @@ const logger = require("../common/logger");
 const fs = require("fs");
 const sequelize = require("../adapters/mysql");
 const blogModel = require("../models/blogs")(sequelize);
+const lodash = require("lodash");
+const { validationResult } = require("express-validator");
+const QueryModel = require("../models/queries")(sequelize);
+const moment = require("moment");
+const requestIp = require("request-ip");
 
 module.exports = {
   home: (req, res) => {
     res.render("index", {
-      csrfToken: "j"
+      csrfToken: "j",
     });
   },
   plans: (req, res) => {
@@ -24,29 +29,12 @@ module.exports = {
   terms: (req, res) => {
     res.render("pages/terms");
   },
-  contact: async (req, res) => {
-    return res.render("pages/contact");
-    await email
-      .send({
-        template: "register",
-        message: {
-          to: "gauravgargtech2@gmail.com",
-          subject: "sample noder",
-        },
-        locals: {
-          name: "Gaurav Garg",
-        },
-      })
-      .then((res) => {
-        console.log("--success");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("err");
-        console.log(err);
-      });
+  contact: (req, res) => {
+    let errorMessage = req.flash("contact");
 
-    res.render("pages/contact");
+    return res.render("pages/contact", {
+      errorMessage: !lodash.isEmpty(errorMessage) ? errorMessage : false,
+    });
   },
 
   blog: async (req, res) => {
@@ -69,5 +57,29 @@ module.exports = {
     res.render("pages/blog_detail", {
       blogDetail: blog,
     });
+  },
+
+  contactSubmit: async (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).render("pages/contact", {
+        errorMessage: errors.array()[0].msg,
+      });
+    }
+
+    await QueryModel.create({
+      name: req.body.name,
+      email: req.body.email,
+      subject: req.body.subject,
+      message: req.body.message,
+      created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+      ip_address: requestIp.getClientIp(req),
+    });
+
+    req.flash(
+      "contact",
+      "Thanks for contacting us, we will get back to you soon."
+    );
+    return res.redirect("/contact");
   },
 };

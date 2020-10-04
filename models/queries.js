@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -11,7 +9,7 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     name: {
       type: DataTypes.STRING(99),
@@ -20,7 +18,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "name"
+      field: "name",
     },
     email: {
       type: DataTypes.STRING(145),
@@ -29,7 +27,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "email"
+      field: "email",
     },
     subject: {
       type: DataTypes.STRING(145),
@@ -38,7 +36,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "subject"
+      field: "subject",
     },
     message: {
       type: DataTypes.TEXT,
@@ -47,7 +45,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "message"
+      field: "message",
     },
     created_at: {
       type: DataTypes.DATE,
@@ -56,7 +54,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "created_at"
+      field: "created_at",
     },
     ip_address: {
       type: DataTypes.STRING(45),
@@ -65,13 +63,14 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "ip_address"
-    }
+      field: "ip_address",
+    },
   };
   const options = {
     tableName: "queries",
     comment: "",
-    indexes: []
+    indexes: [],
+    timestamps: false,
   };
   const QueriesModel = sequelize.define("queries_model", attributes, options);
   return QueriesModel;

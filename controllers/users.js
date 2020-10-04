@@ -118,7 +118,7 @@ module.exports = {
     });
 
     if (lodash.isEmpty(result)) {
-      req.flash("loginError", "Provided email is not regisreted");
+      req.flash("loginError", "Provided email is not registered");
       return res.redirect("/forgot");
     } else {
       const resetLink = req.hostname + "/reset/" + cryptr.encrypt(email);
