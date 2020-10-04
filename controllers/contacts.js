@@ -36,7 +36,7 @@ module.exports = {
 
     let errors = validationResult(req);
 
-    if (!lodash.isEmpty(errors)) {
+    if (!lodash.isEmpty(errors) && !lodash.isEmpty(errors.array())) {
       req.flash("contactCreated", errors.array()[0].msg);
       return res.redirect("/contacts");
     }
