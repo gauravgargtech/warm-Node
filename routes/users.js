@@ -48,7 +48,7 @@ module.exports = (app) => {
   );
   app.get(
     "/auth/google/callback",
-    passport.authenticate("twitter", { failureRedirect: "/login" }),
+    passport.authenticate("google", { failureRedirect: "/login" }),
     async function (req, res) {
       await commonLogin.setLogin(req.user, req, res);
       res.redirect("/");
