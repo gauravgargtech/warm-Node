@@ -73,7 +73,7 @@ module.exports = (app) => {
   );
 
   app.get(
-    "/auth/facebook/callback",
+    "/auth/facebook/callback/",
     passport.authenticate("facebook", { failureRedirect: "/login" }),
     async function (req, res) {
       await commonLogin.setLogin(req.user, req, res);
