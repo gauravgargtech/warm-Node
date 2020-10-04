@@ -2,10 +2,10 @@ const _ = require("lodash");
 const sequelize = require("../adapters/mysql");
 const UserModel = require("../models/users")(sequelize);
 const md5 = require("md5");
+const moment = require("moment");
 
 module.exports = {
   setLogin: (result, req, res) => {
-
     if (_.isEmpty(result)) {
       req.flash("loginError", "Either email or password is wrong");
       return res.redirect("/login");
@@ -47,6 +47,10 @@ module.exports = {
       last_name: details.last_name,
       email: details.email,
       password: md5(details.password),
+      created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+      plan_id: 1,
+      remind_months: 3,
+      for_days: 7,
     });
   },
 

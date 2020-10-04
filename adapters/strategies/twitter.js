@@ -16,7 +16,7 @@ passport.use(
     {
       consumerKey: config.twitterKeys.consumerKey,
       consumerSecret: config.twitterKeys.consumerSecret,
-      callbackURL: "/auth/twitter/callback",
+      callbackURL: config.domain+"/auth/twitter/callback",
     },
     function (token, tokenSecret, profile, done) {
       let email = `${profile.id}@twitter@twitter.c`;
