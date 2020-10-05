@@ -137,7 +137,7 @@ module.exports = {
       locals: {
         name: userDetails.first_name + " " + userDetails.last_name,
         content: noteDetails.description,
-        subject: "Warmnotes : " + striptags(noteDetails.title),
+        subject: "Note : " + striptags(noteDetails.title),
         unsubscribeUrl: "",
       },
     });
