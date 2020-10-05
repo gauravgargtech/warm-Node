@@ -15,4 +15,9 @@ module.exports = (app) => {
     commonLogin.checkAuth,
     notesController.deleteNote
   );
+  app.get(
+    "/notes/email/:noteid",
+    commonLogin.checkAuth,
+    notesController.emailNote
+  );
 };

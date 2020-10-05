@@ -6,6 +6,7 @@ const cityModel = require("../models/cities")(sequelize);
 const notesModel = require("../models/notes")(sequelize);
 const ContactModel = require("../models/contacts")(sequelize);
 const NoteContactModel = require("../models/notes_contacts")(sequelize);
+const UserModel = require("../models/users")(sequelize);
 
 module.exports = {
   getCountries: () => {
@@ -85,5 +86,8 @@ module.exports = {
     }).then((result) => {
       return result[0].id;
     });
+  },
+  getUserById: (id) => {
+    return UserModel.findByPk(id);
   },
 };

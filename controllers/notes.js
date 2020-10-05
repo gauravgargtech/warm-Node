@@ -5,6 +5,8 @@ const notesModel = require("../models/notes")(sequelize);
 const ContactModel = require("../models/contacts")(sequelize);
 const NoteContactsModel = require("../models/notes_contacts")(sequelize);
 const lodash = require("lodash");
+const email = require("../adapters/mailer");
+const path = require("path");
 
 const noteTypes = [
   "Financial Note",
@@ -117,6 +119,30 @@ module.exports = {
     await functions.deleteNoteById(noteId);
 
     req.flash("noteDelete", "Note is deleted successfully!");
+    return res.redirect("/notes");
+  },
+
+  emailNote: async (req, res) => {
+    let noteId = req.params.noteid;
+
+    let noteDetails = await functions.getNoteById(noteId);
+
+    let userDetails = await functions.getUserById(req.session.userId);
+
+    await email.send({
+      template: "email_send",
+      message: {
+        to: userDetails.email,
+      },
+      locals: {
+        name: userDetails.first_name + " " + userDetails.last_name,
+        content: noteDetails.description,
+        subject: "Warmnotes : " + striptags(noteDetails.title),
+        unsubscribeUrl: "",
+      },
+    });
+
+    req.flash("noteDelete", "Note is emailed to you successfully!");
     return res.redirect("/notes");
   },
 };

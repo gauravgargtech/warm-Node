@@ -3,6 +3,7 @@ const sequelize = require("../adapters/mysql");
 const UserModel = require("../models/users")(sequelize);
 const md5 = require("md5");
 const moment = require("moment");
+const email = require("../adapters/mailer");
 
 module.exports = {
   setLogin: (result, req, res) => {
@@ -42,7 +43,7 @@ module.exports = {
   },
 
   registerUser: async (details) => {
-    return await UserModel.create({
+    await UserModel.create({
       first_name: details.first_name,
       last_name: details.last_name,
       email: details.email,
@@ -51,6 +52,17 @@ module.exports = {
       plan_id: 1,
       remind_months: 3,
       for_days: 7,
+    });
+
+    return await email.send({
+      template: "email_send",
+      message: {
+        to: details.email,
+      },
+      locals: {
+        name: details.first_name + " " + details.last_name,
+        unsubscribeUrl: "",
+      },
     });
   },
 

@@ -18,7 +18,6 @@ const email = new Email({
     from: config.email.from,
   },
   send: true,
-  preview: true,
   transport: transport,
   views: {
     root: path.join(path.dirname(__dirname), "/", "views", "/", "emails"),

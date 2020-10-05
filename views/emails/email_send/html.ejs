@@ -313,40 +313,8 @@
             <table role="presentation" class="main">
               <tr>
                 <td class="wrapper">
-                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>
-                              <p>Hi <%= name %>,</p>
-                              <p>Thank You for registering with WarmNotes.
-                                  Please login with your registered email address and your psassword.</p>
-                                  <p>&nbsp;</p>
-                              <p>Please make sure to complete below steps</p>
-                              <p>
-                              <ul>
-                                  <li>Account Settings</li>
-                                  <li>Notes</li>
-                                  <li>Contacts</li>
-                              </ul>
-                              </p>
-                              <p>Let's start writing notes - </p>
-                              <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                                  <tbody>
-                                      <tr>
-                                          <td align="left">
-                                              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                  <tbody>
-                                                      <tr>
-                                                          <td> <a href="https://warmnotes.com/notes" target="_blank">My Notes</a> </td>
-                                                      </tr>
-                                                  </tbody>
-                                              </table>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </td>
-                      </tr>
-                  </table>
+                  <br /><br />
+                  <%- content %>
                 </td>
               </tr>
             </table>
@@ -362,9 +330,7 @@
                     <span class="apple-link"
                       >WarmNotes, 2020 All Rights Reserved</span
                     >
-                    <br />
-                    Don't like these emails?
-                    <a href="<%= unsubscribeUrl %>">Unsubscribe</a>.
+                    <br />                   
                     <br /><br /><br />
                     This e-mail is for the use of the intended recipient(s)
                     only. If you have received this e-mail in error, please
