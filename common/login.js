@@ -55,7 +55,7 @@ module.exports = {
     });
 
     return await email.send({
-      template: "email_send",
+      template: "register",
       message: {
         to: details.email,
       },
