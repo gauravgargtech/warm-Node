@@ -11,17 +11,21 @@ module.exports = function (grunt) {
       },
     },
     cssmin: {
-      target: {
-        files: [
-          {
-            expand: true,
-            cwd: "public/css",
-            src: ["*.css", "!*.min.css"],
-            dest: "public/cssm",
-            ext: ".min.css",
-          },
-        ],
-      },
+      minify: {
+        files: [{
+          expand: true,
+          cwd: 'public/css/',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/cssm/',
+          ext: '.css'
+        }, {
+          expand: true,
+          cwd: 'public/css/',
+          src: ['*.min.css'],
+          dest: 'public/cssm/',
+          ext: '.min.css'
+        }]
+      }
     },
     watch: {
       js: { files: "js/*.js", tasks: ["uglify"] },
@@ -31,9 +35,9 @@ module.exports = function (grunt) {
 
   // load plugins
   grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
+  //grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
 
   // register at least this one task
-  grunt.registerTask("default", ["uglify", "cssmin"]);
+  grunt.registerTask("default", ["cssmin"]);
 };

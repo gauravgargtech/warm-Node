@@ -13,6 +13,7 @@ const csrf = require("csurf");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
+var async = require("async");
 
 const router = express.Router();
 const passportAdapter = require("./adapters/passportAdapter");
@@ -20,16 +21,33 @@ const passportAdapter = require("./adapters/passportAdapter");
 //const app = require("https-localhost")();
 const app = express();
 
-app.use(bodyParser.json());
+
+function parallel(middlewares) {
+  return function (req, res, next) {
+    async.each(middlewares, function (mw, cb) {
+      mw(req, res, cb);
+    }, next);
+  };
+}
+
+app.use(parallel([
+  bodyParser.json(),
+  cookieParser(),
+  ejsLayouts,
+  helmet(),
+  flash(),
+  passport.initialize(),
+  express.static(__dirname + "/public", { maxAge: 31557600 })
+]));
+
+
+;
 app.use(
   bodyParser.urlencoded({
     extended: false,
   })
 );
-app.use(cookieParser());
-app.use(ejsLayouts);
-app.use(helmet());
-app.use(flash());
+;
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -59,7 +77,6 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
 //app.use(passport.session());
 
 var conditionalCSRF = function (req, res, next) {
@@ -77,8 +94,6 @@ var conditionalCSRF = function (req, res, next) {
 
 app.use(conditionalCSRF);
 
-app.use(express.static(__dirname + "/public"));
-
 app.use(
   minifyHTML({
     override: true,
@@ -89,7 +104,6 @@ app.use(
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
       removeEmptyAttributes: true,
-      minifyJS: true,
       minifyHTML: true,
     },
   })
