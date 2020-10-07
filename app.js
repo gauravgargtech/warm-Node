@@ -14,6 +14,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
 var async = require("async");
+var compression = require('compression');
 
 const router = express.Router();
 const passportAdapter = require("./adapters/passportAdapter");
@@ -32,7 +33,7 @@ function parallel(middlewares) {
 
 app.use(parallel([
   bodyParser.json(),
-  cookieParser(),
+  cookieParser(),  
   ejsLayouts,
   helmet(),
   flash(),
@@ -40,8 +41,8 @@ app.use(parallel([
   express.static(__dirname + "/public", { maxAge: 31557600 })
 ]));
 
+app.use(compression());
 
-;
 app.use(
   bodyParser.urlencoded({
     extended: false,
